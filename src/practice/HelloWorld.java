@@ -7,9 +7,8 @@ package practice;
 * http://www.eclipse.org/swt/snippets/
 */
 import org.eclipse.swt.widgets.*;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.RowData;
-import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.*;
+import org.eclipse.swt.layout.*;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
@@ -18,61 +17,86 @@ public class HelloWorld {
 public static void main (String [] args) {
 	Display display = new Display ();
 	Shell shell = new Shell (display);
-	shell.setText("Hello World");
+	shell.setText("Calculator");
 	shell.setSize (300, 200);
 	shell.open ();
 	
-    RowLayout rowLayout = new RowLayout();
-    rowLayout.marginLeft = 10;
-    rowLayout.marginTop = 10;
-    rowLayout.spacing = 15;
-    shell.setLayout(rowLayout);
-    
-    Text text = new Text(shell, SWT.BORDER);
-    text.setLayoutData(new RowData(150, SWT.DEFAULT));
-    text.setText("1st Number");
-    
-    text.addListener(SWT.KeyDown, event -> 
+	GridLayout gridLayout = new GridLayout();
+	gridLayout.numColumns = 4;
+	shell.setLayout(gridLayout);
+	
+	Text text = new Text(shell, SWT.NONE);
+	GridData gridData = new GridData();
+	gridData.horizontalAlignment = GridData.FILL;
+	gridData.horizontalSpan = 4;
+	text.setLayoutData(gridData);
+	
+	text.addListener(SWT.KeyDown, event -> 
     event.doit = event.keyCode == SWT.BS || event.keyCode == SWT.DEL ||
     event.keyCode == SWT.ARROW_LEFT || event.keyCode == SWT.ARROW_RIGHT ||
     Character.isDigit(event.character));
 	
-    Label label = new Label(shell, SWT.NONE);
-    label.setText("+");
+    Button Button1 = new Button(shell, SWT.PUSH);
+    Button1.setText("1");
     
-    Text text2 = new Text(shell, SWT.BORDER);
-    text2.setLayoutData(new RowData(150, SWT.DEFAULT));
-    text2.setText("2nd Number");
+    Button Button2 = new Button(shell, SWT.PUSH);
+    Button2.setText("2");
     
-    text2.addListener(SWT.KeyDown, event -> 
-    event.doit = event.keyCode == SWT.BS || event.keyCode == SWT.DEL ||
-    event.keyCode == SWT.ARROW_LEFT || event.keyCode == SWT.ARROW_RIGHT ||
-    Character.isDigit(event.character));
-
-    Label label2 = new Label(shell, SWT.NONE);
-    label2.setText("=");
+    Button Button3 = new Button(shell, SWT.PUSH);
+    Button3.setText("3");
     
-    Text text3 = new Text(shell, SWT.BORDER);
-    text3.setLayoutData(new RowData(150, SWT.DEFAULT));
-
-    Button addButton = new Button(shell, SWT.PUSH);
-    addButton.setText("Add");
+    Button AddButton = new Button(shell, SWT.PUSH);
+    AddButton.setText("Add");
     
-    addButton.addSelectionListener(new SelectionAdapter() {
-        @Override
-        public void widgetSelected(SelectionEvent e) {
-        	int number = Integer.parseInt(text.getText());
-        	int number2 = Integer.parseInt(text2.getText());
-            text3.setText(Integer.toString(number + number2));
-            text3.forceFocus();
-        }
-    });
+	GridData gridData2 = new GridData();
+	gridData2.verticalAlignment = GridData.FILL;
+	gridData2.verticalSpan = 3;
+	AddButton.setLayoutData(gridData2);
+    
+    Button Button4 = new Button(shell, SWT.PUSH);
+    Button4.setText("4");
+    
+    Button Button5 = new Button(shell, SWT.PUSH);
+    Button5.setText("5");
+    
+    Button Button6 = new Button(shell, SWT.PUSH);
+    Button6.setText("6");
+    
+    Button Button7 = new Button(shell, SWT.PUSH);
+    Button7.setText("7");
+    
+    Button Button8 = new Button(shell, SWT.PUSH);
+    Button8.setText("8");
+    
+    Button Button9 = new Button(shell, SWT.PUSH);
+    Button9.setText("9");
     
     shell.pack();
-    shell.open();
+    
+    Button[] ButtonList = {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9};
+    
+    for(int i = 0; i < ButtonList.length; i++) {
+    	int i_ = i;
+    	ButtonList[i].addSelectionListener(new SelectionAdapter() {
+    	@Override
+        public void widgetSelected(SelectionEvent e) {
+        	
+            text.setText(Integer.toString(i_ + 1));
+            text.forceFocus();
+        }
+    });}
+    
+	AddButton.addSelectionListener(new SelectionAdapter() {
+	@Override
+    public void widgetSelected(SelectionEvent e) {
+	    text.setText("+");
+	    text.forceFocus();
+    }
+});
+
+    
     while (!shell.isDisposed ()) {
 		if (!display.readAndDispatch ()) display.sleep ();
 	}
 	display.dispose ();
-}
-}
+}}
