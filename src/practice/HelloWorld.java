@@ -9,14 +9,12 @@ package practice;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.*;
 import org.eclipse.swt.layout.*;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import java.util.ArrayList;
+import java.util.*;
 
 public class HelloWorld {
 	
-    static ArrayList<String> Calculation = new ArrayList<String>();
-    static int j = 0;
+    public static ArrayList<String> Calculation = new ArrayList<String>();
+    public static int j = 0;
 
 public static void main (String [] args) {
 	Calculation.add("");
@@ -43,57 +41,26 @@ public static void main (String [] args) {
     Character.isDigit(event.character));
 	
     
-	ArrayList<Button> ButtonList = new ArrayList<Button>();
+	ArrayList<NumberButton> NumberButtons = new ArrayList<NumberButton>();
 	
 	for(int i = 0; i < 9; i++) {
-		ButtonList.add(new Button(shell, SWT.PUSH));
-	    ButtonList.get(i).setText(Integer.toString(i+1));
+		NumberButtons.add(new NumberButton(Integer.toString(i + 1), new Button(shell, SWT.PUSH)));
+	    NumberButtons.get(i).button.setText(Integer.toString(i+1));
+	    NumberButtons.get(i).add_custom_listener(text);
 	};
 	
-    Button AddButton = new Button(shell, SWT.PUSH);
-    AddButton.setText("+");
+	FunctionButton Add = new FunctionButton("+", new Button(shell, SWT.PUSH));
+	FunctionButton Subtract = new FunctionButton("-", new Button(shell, SWT.PUSH));
+	FunctionButton Multiply = new FunctionButton("*", new Button(shell, SWT.PUSH));
+	FunctionButton Divide = new FunctionButton("/", new Button(shell, SWT.PUSH));
+	FunctionButton Equals = new FunctionButton("=", new Button(shell, SWT.PUSH));
 	
-    Button SubtractButton = new Button(shell, SWT.PUSH);
-    SubtractButton.setText("-");
-    
-    Button EqualsButton = new Button(shell, SWT.PUSH);
-    EqualsButton.setText("=");
-    
-    
-    
-    for(int i = 0; i < ButtonList.size(); i++) {
-    	int i_ = i;
-    	ButtonList.get(i).addSelectionListener(new SelectionAdapter() {
-    	@Override
-        public void widgetSelected(SelectionEvent e) {
-        	
-    		Calculation.set(j, Calculation.get(j).concat(Integer.toString(i_ + 1)));
-    		String Calc_Concat = "";
-    		for (int k = 0; k < Calculation.size(); k++) {
-    			Calc_Concat = Calc_Concat.concat(Calculation.get(k));
-    		}
-    		text.setText(Calc_Concat);
-            text.forceFocus();
-        }
-    });}
-    
-
-   
-	AddButton.addSelectionListener(new SelectionAdapter() {
-	@Override
-    public void widgetSelected(SelectionEvent e) {
-	    j++;
-	    j++;
-	    Calculation.add("+");
-	    Calculation.add("");
-		String Calc_Concat = "";
-		for (int k = 0; k < Calculation.size(); k++) {
-			Calc_Concat = Calc_Concat.concat(Calculation.get(k));
-		}
-		text.setText(Calc_Concat);
-	    text.forceFocus();
-    }
-});
+	FunctionButton[] FunctionButtons = {Add, Subtract, Multiply, Divide, Equals};
+	
+	for(FunctionButton i:FunctionButtons){
+		i.button.setText(i.symbol);
+		i.add_custom_listener(text);
+	};
 
 	shell.pack();
     
