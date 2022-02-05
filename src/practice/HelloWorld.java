@@ -49,13 +49,13 @@ public static void main (String [] args) {
 	    NumberButtons.get(i).add_custom_listener(text);
 	};
 	
-	FunctionButton Add = new FunctionButton("+", new Button(shell, SWT.PUSH));
-	FunctionButton Subtract = new FunctionButton("-", new Button(shell, SWT.PUSH));
-	FunctionButton Multiply = new FunctionButton("*", new Button(shell, SWT.PUSH));
-	FunctionButton Divide = new FunctionButton("/", new Button(shell, SWT.PUSH));
-	FunctionButton Equals = new FunctionButton("=", new Button(shell, SWT.PUSH));
 	
-	FunctionButton[] FunctionButtons = {Add, Subtract, Multiply, Divide, Equals};
+	ArrayList<FunctionButton> FunctionButtons = new ArrayList<FunctionButton>();
+	String[] functions = {"+", "-", "*", "/", "="};
+	
+	for(String i : functions) {
+		FunctionButtons.add(new FunctionButton(i, new Button(shell, SWT.PUSH)));
+	};
 	
 	for(FunctionButton i:FunctionButtons){
 		i.button.setText(i.symbol);

@@ -19,6 +19,7 @@ void add_custom_listener(Text TextBox){
 	    HelloWorld.Calculation.add(symbol);
 	    HelloWorld.Calculation.add("");
 	    HelloWorld.j++;
+	    HelloWorld.j++;
 		String Calc_Concat = "";
 		for (int k = 0; k < HelloWorld.Calculation.size(); k++) {
 			Calc_Concat = Calc_Concat.concat(HelloWorld.Calculation.get(k));
