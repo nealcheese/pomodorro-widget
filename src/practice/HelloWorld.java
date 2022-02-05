@@ -11,10 +11,16 @@ import org.eclipse.swt.*;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import java.util.ArrayList;
 
 public class HelloWorld {
+	
+    static ArrayList<String> Calculation = new ArrayList<String>();
+    static int j = 0;
 
 public static void main (String [] args) {
+	Calculation.add("");
+	
 	Display display = new Display ();
 	Shell shell = new Shell (display);
 	shell.setText("Calculator");
@@ -71,9 +77,8 @@ public static void main (String [] args) {
     Button Button9 = new Button(shell, SWT.PUSH);
     Button9.setText("9");
     
-    shell.pack();
-    
     Button[] ButtonList = {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9};
+
     
     for(int i = 0; i < ButtonList.length; i++) {
     	int i_ = i;
@@ -81,19 +86,35 @@ public static void main (String [] args) {
     	@Override
         public void widgetSelected(SelectionEvent e) {
         	
-            text.setText(Integer.toString(i_ + 1));
+    		Calculation.set(j, Calculation.get(j).concat(Integer.toString(i_ + 1)));
+    		String Calc_Concat = "";
+    		for (int k = 0; k < Calculation.size(); k++) {
+    			Calc_Concat = Calc_Concat.concat(Calculation.get(k));
+    		}
+    		text.setText(Calc_Concat);
             text.forceFocus();
         }
     });}
     
+
+   
 	AddButton.addSelectionListener(new SelectionAdapter() {
 	@Override
     public void widgetSelected(SelectionEvent e) {
-	    text.setText("+");
+	    j++;
+	    j++;
+	    Calculation.add("+");
+	    Calculation.add("");
+		String Calc_Concat = "";
+		for (int k = 0; k < Calculation.size(); k++) {
+			Calc_Concat = Calc_Concat.concat(Calculation.get(k));
+		}
+		text.setText(Calc_Concat);
 	    text.forceFocus();
     }
 });
 
+	shell.pack();
     
     while (!shell.isDisposed ()) {
 		if (!display.readAndDispatch ()) display.sleep ();
