@@ -10,6 +10,7 @@ public class HelloWorld {
 	//Declare public variables 
 	public static ArrayList<String> Calculation = new ArrayList<String>();
     public static int j = 0;
+    
 
 public static void main (String [] args) {
 	
@@ -58,7 +59,7 @@ public static void main (String [] args) {
 	//The numbering of the Number Buttons from 0 to 9 means it works well with the standard for loop iteration, starting at int i = 0
 	//The Function Buttons are labelled by symbols so it doesn't work so cleanly, also writing for each loops is fun lol
 	ArrayList<FunctionButton> FunctionButtons = new ArrayList<FunctionButton>();
-	String[] functions = {"+", "-", "*", "/", "="};
+	String[] functions = {"+", "-", "="};
 	
 	for(String i : functions) {
 		FunctionButtons.add(new FunctionButton(i, new Button(shell, SWT.PUSH)));
@@ -66,9 +67,10 @@ public static void main (String [] args) {
 	
 	for(FunctionButton i:FunctionButtons){
 		i.button.setText(i.symbol);
-		i.add_custom_listener(text);
+		if(i.symbol != "=")
+		i.add_custom_operation_listener(text);
+		else i.add_custom_equals_listener(text);
 	};
-	
 	
 
 	shell.pack();
