@@ -19,13 +19,13 @@ void add_custom_operation_listener(Text TextBox){
 	this.button.addSelectionListener(new SelectionAdapter() {
 	@Override
     public void widgetSelected(SelectionEvent e) {
-	    HelloWorld.Calculation.add(symbol);
-	    HelloWorld.Calculation.add("");
-	    HelloWorld.j++;
-	    HelloWorld.j++;
+	    MasterScript.Calculation.add(symbol);
+	    MasterScript.Calculation.add("");
+	    MasterScript.j++;
+	    MasterScript.j++;
 		String Calc_Concat = "";
-		for (int k = 0; k < HelloWorld.Calculation.size(); k++) {
-			Calc_Concat = Calc_Concat.concat(HelloWorld.Calculation.get(k));
+		for (int k = 0; k < MasterScript.Calculation.size(); k++) {
+			Calc_Concat = Calc_Concat.concat(MasterScript.Calculation.get(k));
 		}
 		TextBox.setText(Calc_Concat);
         TextBox.forceFocus();
@@ -35,11 +35,11 @@ void add_custom_equals_listener(Text TextBox){
 	this.button.addSelectionListener(new SelectionAdapter() {
 	@Override
     public void widgetSelected(SelectionEvent e) {
-		
-
 	
-		String Calc_String = "float foo =" + String.join(" ", HelloWorld.Calculation);
-		
+		String Calc_String = "float foo =" + String.join(" ", MasterScript.Calculation);
+		MasterScript.Calculation.clear();
+		MasterScript.Calculation.add("");
+		MasterScript.j = 0;
 		Interpreter interpreter = new Interpreter();
 		try {
 			interpreter.eval(Calc_String);

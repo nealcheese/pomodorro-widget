@@ -5,7 +5,7 @@ import org.eclipse.swt.*;
 import org.eclipse.swt.layout.*;
 import java.util.*;
 
-public class HelloWorld {
+public class MasterScript {
 	
 	//Declare public variables 
 	public static ArrayList<String> Calculation = new ArrayList<String>();
@@ -67,6 +67,8 @@ public static void main (String [] args) {
 	
 	for(FunctionButton i:FunctionButtons){
 		i.button.setText(i.symbol);
+		
+		//the listener for the equals operator is different to all the others
 		if(i.symbol != "=")
 		i.add_custom_operation_listener(text);
 		else i.add_custom_equals_listener(text);

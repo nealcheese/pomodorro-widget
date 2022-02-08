@@ -17,10 +17,10 @@ void add_custom_listener(Text TextBox){
 	@Override
     public void widgetSelected(SelectionEvent e) {
     	
-		HelloWorld.Calculation.set(HelloWorld.j, HelloWorld.Calculation.get(HelloWorld.j).concat(number));
+		MasterScript.Calculation.set(MasterScript.j, MasterScript.Calculation.get(MasterScript.j).concat(number));
 		String Calc_Concat = "";
-		for (int k = 0; k < HelloWorld.Calculation.size(); k++) {
-			Calc_Concat = Calc_Concat.concat(HelloWorld.Calculation.get(k));
+		for (int k = 0; k < MasterScript.Calculation.size(); k++) {
+			Calc_Concat = Calc_Concat.concat(MasterScript.Calculation.get(k));
 		}
 		TextBox.setText(Calc_Concat);
         TextBox.forceFocus();
